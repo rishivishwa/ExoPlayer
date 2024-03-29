@@ -141,7 +141,6 @@ class MainActivity : AppCompatActivity() {
                             val sortEditor = getSharedPreferences("Sorting", MODE_PRIVATE).edit()
                             sortEditor.putInt("sortValue", value)
                             sortEditor.apply()
-
                             //for restarting app
                             finish()
                             startActivity(intent)
@@ -155,18 +154,14 @@ class MainActivity : AppCompatActivity() {
                 }
                 R.id.aboutNav -> startActivity(Intent(this, AboutActivity::class.java))
                 R.id.exitNav -> exitProcess(1)
-                R.id.navUrl -> startActivity(Intent(this@MainActivity, UrlActivity::class.java))
+                R.id.navUrl -> startActivity(Intent(this, UrlActivity::class.java))
                 R.id.navYoutube -> {
                     if (checkForInternet(this)) {
                         val url = "https://youtube.com/"
                         val builder = CustomTabsIntent.Builder()
                         @Suppress("DEPRECATION")
-                        builder.setToolbarColor(
-                            MaterialColors.getColor(
-                                this,
-                                R.attr.themeColor,
-                                Color.RED
-                            )
+                        builder.setToolbarColor(MaterialColors.getColor(
+                            this, R.attr.themeColor, Color.RED)
                         )
                         val customTabsIntent = builder.build()
                         customTabsIntent.intent.`package` = "com.android.chrome"
@@ -187,7 +182,6 @@ class MainActivity : AppCompatActivity() {
     }
     //for requesting permission
     private fun requestRuntimePermission(): Boolean{
-
         //requesting storage permission for only devices less than api 28
         if(Build.VERSION.SDK_INT <= Build.VERSION_CODES.P){
             if(ActivityCompat.checkSelfPermission(this, WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED){
@@ -218,7 +212,7 @@ class MainActivity : AppCompatActivity() {
                     ActivityCompat.requestPermissions(this, arrayOf(WRITE_EXTERNAL_STORAGE),13)
                 }
                 .show()
-//                ActivityCompat.requestPermissions(this, arrayOf(WRITE_EXTERNAL_STORAGE),13)
+                ActivityCompat.requestPermissions(this, arrayOf(WRITE_EXTERNAL_STORAGE),13)
         }
 
         //for read external storage permission
